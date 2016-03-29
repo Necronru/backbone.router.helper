@@ -1,37 +1,60 @@
-'use strict';
+(function(factory) {
 
-Backbone.RouterHelper = function() {};
+  // Set up RouterHelper appropriately for the environment. Start with AMD.
+  if (typeof define === 'function' && define.amd)
+    define(['underscore', 'backbone', 'exports'], factory);
 
-_(Backbone.RouterHelper.prototype).extend({
-  replacePattern: '<%= $2 %>',
-  VERSION: '0.1.0'
-});
+  // Next for Node.js or CommonJS.
+  else if (typeof exports === 'object')
+    factory(require('underscore'), require('backbone'), exports);
 
-(function (Helper) {
+  // Finally, as a browser global.
+  else
+    factory(_, Backbone, {});
+
+})(function (_, Backbone, RouterHelper) {
+
+  Backbone.RouterHelper = RouterHelper;
+
+  _(RouterHelper).extend({
+    replacePattern: '<%= $2 %>',
+    VERSION: '0.1.0',
+
+    template: function(route, pattern) {
+      pattern = pattern || RouterHelper.replacePattern;
+
+      tpl = route.replace(/\((\:)(\w+)\)/ig, pattern);
+      tpl = tpl.replace(/\(\/\)/ig, '/');
+
+      return _.template(tpl);
+    }
+
+  });
 
   _(Backbone.Router.prototype).extend({
 
     generate: function(name, parameters, pattern) {
-      pattern    = pattern || Helper.prototype.replacePattern;
       parameters = _.extend({}, parameters);
 
-      var routes = _.invert( _.clone(this.routes) );
-
-      if ( ! _.has(routes, name)) {
-        console.error('route name %s not found in current router', name);
-        return null;
+      if ( ! this.hasRoute(name) ) {
+        throw new Error('route name '+name+' not found in current router');
       }
 
-      var tpl = routes[name].replace(/\((\:)(\w+)\)/ig, pattern);
-      tpl = tpl.replace(/\(\/\)/ig, '/');
-
-      return _.template(tpl)(parameters);
+      var route = this.getRoutes()[name];
+      return RouterHelper.template(route, pattern)(parameters);
     },
 
     navigateTo: function(name, parameters, options, pattern) {
-      var url = this.generate(name, parameters, pattern);
-      return this.navigate(url, options);
+      return this.navigate( this.generate(name, parameters, pattern), options );
+    },
+
+    hasRoute: function(name) {
+      return _.has( this.getRoutes(), name);
+    },
+
+    getRoutes: function() {
+      return _.invert( _.clone(this.routes) );
     }
 
   });
-})(Backbone.RouterHelper);
+});
