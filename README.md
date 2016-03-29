@@ -31,5 +31,4 @@ Backbone.RouterHelper.prototype.replacePattern = '<%= $2 %>';
 
 ## TODO
 
-- Tests
 - npm run build
