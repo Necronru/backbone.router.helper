@@ -18,7 +18,7 @@
 
   _(RouterHelper).extend({
     replacePattern: '<%= $2 %>',
-    VERSION: '0.1.0',
+    VERSION: '0.2.0',
 
     template: function(route, pattern) {
       pattern = pattern || RouterHelper.replacePattern;
