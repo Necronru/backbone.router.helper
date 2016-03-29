@@ -25,8 +25,9 @@
 ```
 
 ## Defaults
-
+```javascript
 	Backbone.RouterHelper.prototype.replacePattern = '<%= $2 %>';
+```
 
 ## TODO
 
