@@ -1,0 +1,23 @@
+{
+  "name": "backbone.router.helper",
+  "version": "0.1.0",
+  "description": "",
+  "main": "backbone.router.helper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Necronru/backbone.router.helper.git"
+  },
+  "keywords": [
+    "backbone",
+    "router"
+  ],
+  "author": "Roman Toroshin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Necronru/backbone.router.helper/issues"
+  },
+  "homepage": "https://github.com/Necronru/backbone.router.helper#readme"
+}
