@@ -14,7 +14,7 @@
     "backbone",
     "router"
   ],
-  "author": "Roman Toroshin",
+  "author": "Roman Toroshin <necronru@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Necronru/backbone.router.helper/issues"
