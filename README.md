@@ -1,3 +1,5 @@
+# !!! DEPRECATED
+
 # Backbone.RouterHelper
 
 ## Examples
