@@ -1,4 +1,4 @@
-# !!! DEPRECATED
+# !!! This repository is no longer supported
 
 # Backbone.RouterHelper
 
